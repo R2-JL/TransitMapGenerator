@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="onebusaway-gtfs-modules-master/|onebusaway-gtfs-modules-master/" kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.wb.swing.FormLayout.lib_1.8.0.r45x201506110826/jgoodies-common-1.8.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
