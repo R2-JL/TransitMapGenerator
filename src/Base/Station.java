@@ -5,6 +5,7 @@ public class Station extends Node {
 	public double lat, lon;
 	public String name;
 	public String key;
+	public boolean usingInMap;
 	
 
 	public Station() {

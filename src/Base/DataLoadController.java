@@ -22,14 +22,12 @@ public class DataLoadController {
 		chooseFilepath();
 		readGTFS();
 		userChooseLines();
-		//userChooseTrips();
-		generateSystemModel();
 		return system;
 	}
 	
 	private void chooseFilepath(){
 		//TODO implement properly
-		filepath = "C:\\GTFS\\BART";
+		filepath = "C:\\GTFS\\WMATA";
 	}
 	
 	private void readGTFS(){
@@ -87,6 +85,8 @@ public class DataLoadController {
 	}
 	
 	private void generateSystemModel(){
-		
+		SystemModel sys = new SystemModel(gtfsSystem);
+		System.out.println("SystemModel generated");
+		System.out.println("");
 	}
 }
