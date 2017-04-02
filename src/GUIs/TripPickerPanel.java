@@ -123,7 +123,7 @@ public class TripPickerPanel extends JPanel {
 		line = l;
 		tripList.clearSelection();
 		
-		lblSelectTripFor.setText("");
+		lblSelectTripFor.setText("Select trip for line " + l.toString());
 		
 		//build list model for tripList
 		DefaultListModel<GTFS.GTFSTrip> mod = new DefaultListModel<GTFS.GTFSTrip>();

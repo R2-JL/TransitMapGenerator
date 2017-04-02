@@ -27,7 +27,7 @@ public class DataLoadController {
 	
 	private void chooseFilepath(){
 		//TODO implement properly
-		filepath = "C:\\GTFS\\WMATA";
+		filepath = "C:\\GTFS\\BART";
 	}
 	
 	private void readGTFS(){

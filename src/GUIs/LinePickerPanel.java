@@ -32,7 +32,7 @@ public class LinePickerPanel extends JPanel {
 		JList<GTFS.GTFSLine> list = new JList<GTFS.GTFSLine>(new Vector<GTFS.GTFSLine>(sys.getLines()));
 		scrollPane.setViewportView(list);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Next");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(list.isSelectionEmpty()){
