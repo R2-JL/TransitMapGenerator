@@ -1,16 +1,18 @@
 package GTFS;
 
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.IOException;
 
 public class ReaderTester {
 	public static void main(String[] args){
-		GTFSReader read = new GTFSReader("C:\\GTFS\\TriMet");
+		GTFSReader read;
 		try {
+			read = new GTFSReader(new File("C:\\GTFS\\BART.zip"));
 			read.readStops();
 			read.readLines();
 			read.readTrips();
 			read.readStopCalls();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

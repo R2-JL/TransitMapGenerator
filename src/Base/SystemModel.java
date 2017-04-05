@@ -7,6 +7,9 @@ public class SystemModel {
 	public ArrayList<Line> lines;
 	public ArrayList<Node> nodes;
 	
+	public static int X_SIZE = 1000;
+	public static int Y_SIZE = 1000;
+	
 	public SystemModel(GTFS.GTFSSystem fromGTFS ){
 		lines = new ArrayList<Line>();
 		nodes = new ArrayList<Node>();
@@ -73,7 +76,7 @@ public class SystemModel {
 		
 		for(Station s : stopMap.values()){
 			if(s.usingInMap){
-				s.Normalize(minLat, minLon, 0, 0, maxLat - minLat, maxLon - minLon, 1000, 1000);
+				s.Normalize(minLat, minLon, 0, 0, maxLat - minLat, maxLon - minLon, X_SIZE, Y_SIZE);
 				nodes.add(s);
 			}
 		}
@@ -82,6 +85,9 @@ public class SystemModel {
 	
 	private Color parseColor(String hexCode){
 		if(hexCode == null){
+			return Color.BLACK;
+		}
+		if(hexCode.equals("")){
 			return Color.BLACK;
 		}
 		try{

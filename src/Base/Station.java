@@ -14,7 +14,7 @@ public class Station extends Node {
 
 	public void Normalize(double minLat, double minLon, double minX, double minY, double latRange, double lonRange,
 			double xRange, double yRange) {
-		x = (lat - minLat) * (xRange / latRange);
-		y = (lon - minLon) * (yRange / lonRange);
+		y = (lat - minLat) * (xRange / latRange);
+		x = (lon - minLon) * (yRange / lonRange);
 	}
 }

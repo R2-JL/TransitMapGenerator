@@ -2,8 +2,10 @@ package GTFS;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.zip.ZipFile;
 
 public class GTFSReader {
 	private String folderPath;
@@ -11,14 +13,15 @@ public class GTFSReader {
 	private Scanner lineScan;
 	private File f;
 	private GTFSSystem sys;
+	private ZipFile archive;
 	public boolean doDeLinkStations = true;
 	
-	public GTFSReader(String path){
-		folderPath = path;
+	public GTFSReader(File gtfsFeed) throws IOException{
 		sys = new GTFSSystem();
+		archive = new ZipFile(gtfsFeed);
 	}
 	
-	public void readStops() throws FileNotFoundException{
+	public void readStops() throws IOException{
 		int indexId = -1;
 		int indexName = -1;
 		int indexLat = -1;
@@ -26,8 +29,9 @@ public class GTFSReader {
 		int indexIsStation = -1;
 		int indexParentStation = -1;
 		
-		f = new File(folderPath + "\\stops.txt");
-		fileScan = new Scanner(f);
+//		f = new File(folderPath + "\\stops.txt");
+//		fileScan = new Scanner(f);
+		fileScan = new Scanner(archive.getInputStream(archive.getEntry("stops.txt")));
 		
 		//set up token order
 		lineScan = new Scanner(fileScan.nextLine());
@@ -88,14 +92,14 @@ public class GTFSReader {
 		fileScan.close();
 	}
 	
-	public void readLines() throws FileNotFoundException{
+	public void readLines() throws IOException{
 		int indexId = -1;
 		int indexSName = -1;
 		int indexLName = -1;
 		int indexColor = -1;
 		
-		f = new File(folderPath + "\\routes.txt");
-		fileScan = new Scanner(f);
+		//f = new File(folderPath + "\\routes.txt");
+		fileScan = new Scanner(archive.getInputStream(archive.getEntry("routes.txt")));
 		
 		//set up token order
 		lineScan = new Scanner(fileScan.nextLine());
@@ -142,13 +146,13 @@ public class GTFSReader {
 		fileScan.close();
 	}
 	
-	public void readTrips() throws FileNotFoundException{
+	public void readTrips() throws IOException{
 		int indexId = -1;
 		int indexRoute = -1;
 		int indexHeadsign = -1;
 		
-		f = new File(folderPath + "\\trips.txt");
-		fileScan = new Scanner(f);
+		//f = new File(folderPath + "\\trips.txt");
+		fileScan = new Scanner(archive.getInputStream(archive.getEntry("trips.txt")));
 		
 		//set up token order
 		lineScan = new Scanner(fileScan.nextLine());
@@ -189,14 +193,14 @@ public class GTFSReader {
 		fileScan.close();
 	}
 	
-	public void readStopCalls() throws FileNotFoundException{
+	public void readStopCalls() throws IOException{
 		int indexSeq = -1;
 		int indexStop= -1;
 		int indexTrip = -1;
 		ArrayList<GTFSStopCall> calls = new ArrayList<GTFSStopCall>();
 		
-		f = new File(folderPath + "\\stop_times.txt");
-		fileScan = new Scanner(f);
+		//f = new File(folderPath + "\\stop_times.txt");
+		fileScan = new Scanner(archive.getInputStream(archive.getEntry("stop_times.txt")));
 		
 		//set up token order
 		lineScan = new Scanner(fileScan.nextLine());
@@ -245,6 +249,8 @@ public class GTFSReader {
 		for(GTFSTrip t : sys.trips.values()){
 			t.stops.sort(null);
 		}
+		
+		archive.close();
 	}
 	
 	public GTFSSystem getSystem(){

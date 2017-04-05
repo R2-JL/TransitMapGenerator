@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.geom.Line2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,22 +33,27 @@ public class HelloGraphics extends JFrame {
 		});
 	}
 	
-	private void draw(Graphics g){
-		Graphics2D g2 = (Graphics2D) g;
-		
-		g2.setPaint(Color.RED);
-		
-		int w = getWidth();
-		int h = getHeight();
-		
-		g2.drawLine(100, 100, w-100, h-100);
-	}
-	
-	@Override
-	public void paint(Graphics g){
-		super.paint(g);
-		draw(g);
-	}
+//	private void draw(Graphics g){
+//		Graphics2D g2 = (Graphics2D) g;
+//		
+//		g2.setPaint(Color.RED);
+//		
+//		int w = getWidth();
+//		int h = getHeight();
+//		
+//		//g2.drawLine(0, 0, w, h);
+//		
+//		Rectangle r = getBounds();
+//		System.out.println("x: " + r.getMinX() + ", " + r.getMaxX() + ". y: " + r.getMinY() + ", " + r.getMaxY() + ".");
+//		
+//		g2.draw(new Line2D.Double(r.getMinX(), r.getMinY(), r.getMaxX(), r.getMaxY()));
+//	}
+//	
+//	@Override
+//	public void paint(Graphics g){
+//		super.paint(g);
+//		draw(g);
+//	}
 
 	/**
 	 * Create the frame.
@@ -54,7 +61,7 @@ public class HelloGraphics extends JFrame {
 	public HelloGraphics() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		//contentPane = new BasicRenderer();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
