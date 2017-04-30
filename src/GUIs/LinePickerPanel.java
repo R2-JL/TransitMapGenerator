@@ -20,9 +20,9 @@ public class LinePickerPanel extends JPanel {
 	 * Create the panel.
 	 */
 	private GTFS.GTFSSystem sys;
-	private Base.DataLoadController ctrl;
+	private Base.Controller ctrl;
 	
-	public LinePickerPanel(Base.DataLoadController c, GTFS.GTFSSystem s) {
+	public LinePickerPanel(Base.Controller c, GTFS.GTFSSystem s) {
 		sys = s;
 		ctrl = c;
 		setLayout(new BorderLayout(0, 0));

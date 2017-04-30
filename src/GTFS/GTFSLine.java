@@ -1,7 +1,5 @@
 package GTFS;
 
-import java.util.ArrayList;
-
 public class GTFSLine implements Comparable<GTFSLine> {
 	public String id;
 	public String sName;

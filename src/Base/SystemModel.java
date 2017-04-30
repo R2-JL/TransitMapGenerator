@@ -1,11 +1,13 @@
 package Base;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class SystemModel {
 	public ArrayList<Line> lines;
 	public ArrayList<Node> nodes;
+	public ArrayList<Segment> segments;
 	
 	public static int X_SIZE = 1000;
 	public static int Y_SIZE = 1000;
@@ -13,6 +15,7 @@ public class SystemModel {
 	public SystemModel(GTFS.GTFSSystem fromGTFS ){
 		lines = new ArrayList<Line>();
 		nodes = new ArrayList<Node>();
+		segments = new ArrayList<Segment>();
 		
 		HashMap<String, Station> stopMap = new HashMap<String, Station>();
 		double minLat = 9999;
@@ -74,10 +77,54 @@ public class SystemModel {
 			}
 		}
 		
+		//Note termini
+		
+		for(Line l : lines){
+			l.nodes.get(0).terminatingLines.add(l);
+			if(l.nodes.size() > 1){
+				//Worth checking, but if it's not what's wrong with your transit system?
+				l.nodes.get(l.nodes.size() - 1).terminatingLines.add(l);
+			}
+		}
+		
+		//Normalize position
+		
 		for(Station s : stopMap.values()){
 			if(s.usingInMap){
 				s.Normalize(minLat, minLon, 0, 0, maxLat - minLat, maxLon - minLon, X_SIZE, Y_SIZE);
 				nodes.add(s);
+			}
+		}
+		
+		//Generate segments
+		
+		ArrayList<Segment> tempSegments = new ArrayList<Segment>();
+		
+		for(Line l : lines){
+			for(int i = 0; i < l.nodes.size() - 1; i++){
+				Segment seg = new Segment(l.nodes.get(i), l.nodes.get(i + 1));
+				seg.lines.add(l);
+				tempSegments.add(seg);
+			}
+		}
+		
+		Collections.sort(tempSegments);
+
+		//Collate segments
+		
+		int firstMatch = 0;
+		for(int i = 0; i <= tempSegments.size(); i++){
+//			if(i == tempSegments.size()){
+//				//TODO add logic
+//			}
+			if(i < tempSegments.size() && tempSegments.get(firstMatch).compareTo(tempSegments.get(i)) == 0){
+				continue;
+			} else {
+				for(int j = firstMatch + 1; j < i; j++){
+					tempSegments.get(firstMatch).lines.add(tempSegments.get(j).lines.get(0));
+				}
+				segments.add(tempSegments.get(firstMatch));
+				firstMatch = i;
 			}
 		}
 	}

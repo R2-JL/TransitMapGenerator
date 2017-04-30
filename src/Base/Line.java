@@ -11,4 +11,8 @@ public class Line {
 	public Line() {
 		nodes = new ArrayList<Node>();
 	}
+	
+	public String toString(){
+		return name;
+	}
 }

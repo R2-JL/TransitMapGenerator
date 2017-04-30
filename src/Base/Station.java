@@ -1,5 +1,4 @@
 package Base;
-import java.util.ArrayList;
 
 public class Station extends Node {
 	public double lat, lon;
@@ -16,5 +15,9 @@ public class Station extends Node {
 			double xRange, double yRange) {
 		y = (lat - minLat) * (xRange / latRange);
 		x = (lon - minLon) * (yRange / lonRange);
+	}
+	
+	public String toString(){
+		return name;
 	}
 }

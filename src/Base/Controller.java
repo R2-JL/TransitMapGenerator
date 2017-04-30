@@ -1,6 +1,5 @@
 package Base;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,7 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import GTFS.GTFSReader;
 
-public class DataLoadController {
+public class Controller {
 	private GUIs.TransitMapGenerator mainWindow;
 	private File gtfsFeed;
 	public GTFS.GTFSSystem gtfsSystem;
@@ -19,7 +18,7 @@ public class DataLoadController {
 	private int lineIndex = 0;
 	private ArrayList<GTFS.GTFSLine> lines;
 	
-	public DataLoadController(GUIs.TransitMapGenerator window){
+	public Controller(GUIs.TransitMapGenerator window){
 		mainWindow = window;
 	}
 	
@@ -31,8 +30,6 @@ public class DataLoadController {
 	}
 	
 	private void chooseFilepath(){
-		//TODO implement properly
-		//filepath = "C:\\GTFS\\BART.zip";
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("ZIP archives", "zip");
 		chooser.setFileFilter(filter);
@@ -68,7 +65,6 @@ public class DataLoadController {
 	}
 	
 	private void userChooseLines(){
-		//mainWindow.removeAll();
 		linePickerPanel.setVisible(true);
 		mainWindow.repaint();
 	}
@@ -101,13 +97,11 @@ public class DataLoadController {
 	
 	private void generateSystemModel(){
 		SystemModel sys = new SystemModel(gtfsSystem);
-		System.out.println("SystemModel generated");
-		System.out.println("");
 		
 		//this may move later, but for now:
 		//render map
 		
 		mainWindow.remove(tripPickerPanel);
-		mainWindow.add(new GUIs.BasicRenderer(sys));
+		mainWindow.add(new GUIs.Renderer(sys));
 	}
 }

@@ -32,13 +32,13 @@ public class TripPickerPanel extends JPanel {
 	private JList<GTFS.GTFSStop> stopList;
 	private JLabel lblStationsServed;
 	private JLabel lblSelectTripFor;
-	private Base.DataLoadController ctrl;
+	private Base.Controller ctrl;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public TripPickerPanel(Base.DataLoadController c, GTFS.GTFSSystem s) {
+	public TripPickerPanel(Base.Controller c, GTFS.GTFSSystem s) {
 		ctrl = c;
 		sys = s;
 		setLayout(new FormLayout(new ColumnSpec[] {

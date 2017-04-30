@@ -1,17 +1,15 @@
 package GTFS;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.zip.ZipFile;
+import Base.Tokeniser;
 
 public class GTFSReader {
-	private String folderPath;
 	private Scanner fileScan;
-	private Scanner lineScan;
-	private File f;
+	private Tokeniser lineScan;
 	private GTFSSystem sys;
 	private ZipFile archive;
 	public boolean doDeLinkStations = true;
@@ -29,13 +27,11 @@ public class GTFSReader {
 		int indexIsStation = -1;
 		int indexParentStation = -1;
 		
-//		f = new File(folderPath + "\\stops.txt");
-//		fileScan = new Scanner(f);
 		fileScan = new Scanner(archive.getInputStream(archive.getEntry("stops.txt")));
 		
 		//set up token order
-		lineScan = new Scanner(fileScan.nextLine());
-		lineScan.useDelimiter(",");
+		lineScan = new Tokeniser(fileScan.nextLine());
+	
 		for(int i = 0; lineScan.hasNext();i++){
 			String tok = lineScan.next();
 			if(tok.equalsIgnoreCase("stop_id")){
@@ -60,8 +56,7 @@ public class GTFSReader {
 		
 		//read entries
 		while(fileScan.hasNextLine()){
-			lineScan = new Scanner(fileScan.nextLine());
-			lineScan.useDelimiter(",");
+			lineScan = new Tokeniser(fileScan.nextLine());
 			
 			GTFSStop s = new GTFSStop();
 			for(int i = 0; lineScan.hasNext(); i++){
@@ -98,12 +93,10 @@ public class GTFSReader {
 		int indexLName = -1;
 		int indexColor = -1;
 		
-		//f = new File(folderPath + "\\routes.txt");
 		fileScan = new Scanner(archive.getInputStream(archive.getEntry("routes.txt")));
 		
 		//set up token order
-		lineScan = new Scanner(fileScan.nextLine());
-		lineScan.useDelimiter(",");
+		lineScan = new Tokeniser(fileScan.nextLine());
 		for(int i = 0; lineScan.hasNext();i++){
 			String tok = lineScan.next();
 			if(tok.equalsIgnoreCase("route_id")){
@@ -122,8 +115,7 @@ public class GTFSReader {
 		
 		//read entries
 		while(fileScan.hasNextLine()){
-			lineScan = new Scanner(fileScan.nextLine());
-			lineScan.useDelimiter(",");
+			lineScan = new Tokeniser(fileScan.nextLine());
 			
 			GTFSLine l = new GTFSLine();
 			for(int i = 0; lineScan.hasNext(); i++){
@@ -151,12 +143,10 @@ public class GTFSReader {
 		int indexRoute = -1;
 		int indexHeadsign = -1;
 		
-		//f = new File(folderPath + "\\trips.txt");
 		fileScan = new Scanner(archive.getInputStream(archive.getEntry("trips.txt")));
 		
 		//set up token order
-		lineScan = new Scanner(fileScan.nextLine());
-		lineScan.useDelimiter(",");
+		lineScan = new Tokeniser(fileScan.nextLine());
 		for(int i = 0; lineScan.hasNext();i++){
 			String tok = lineScan.next();
 			if(tok.equalsIgnoreCase("route_id")){
@@ -172,8 +162,7 @@ public class GTFSReader {
 		
 		//read entries
 		while(fileScan.hasNextLine()){
-			lineScan = new Scanner(fileScan.nextLine());
-			lineScan.useDelimiter(",");
+			lineScan = new Tokeniser(fileScan.nextLine());
 			
 			GTFSTrip t = new GTFSTrip();
 			for(int i = 0; lineScan.hasNext(); i++){
@@ -199,12 +188,10 @@ public class GTFSReader {
 		int indexTrip = -1;
 		ArrayList<GTFSStopCall> calls = new ArrayList<GTFSStopCall>();
 		
-		//f = new File(folderPath + "\\stop_times.txt");
 		fileScan = new Scanner(archive.getInputStream(archive.getEntry("stop_times.txt")));
 		
 		//set up token order
-		lineScan = new Scanner(fileScan.nextLine());
-		lineScan.useDelimiter(",");
+		lineScan = new Tokeniser(fileScan.nextLine());
 		for(int i = 0; lineScan.hasNext();i++){
 			String tok = lineScan.next();
 			if(tok.equalsIgnoreCase("trip_id")){
@@ -220,8 +207,7 @@ public class GTFSReader {
 		
 		//read entries
 		while(fileScan.hasNextLine()){
-			lineScan = new Scanner(fileScan.nextLine());
-			lineScan.useDelimiter(",");
+			lineScan = new Tokeniser(fileScan.nextLine());
 			
 			GTFSStopCall c = new GTFSStopCall();
 			for(int i = 0; lineScan.hasNext(); i++){
